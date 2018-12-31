@@ -2773,8 +2773,22 @@ input, select, textarea {
 	}
 
 		ul.contact > li {
+			display: inline-block;
+			width: 32%;
 			padding: 0;
 			margin: 1.5em 0 0 0;
+		}
+
+		@media screen and (max-width: 736px) {
+			ul.contact > li {
+				width: 50%;
+			}
+		}
+
+		@media screen and (max-width: 480px) {
+			ul.contact > li {
+				width: 100%;
+			}
 		}
 
 			ul.contact > li:first-child {
