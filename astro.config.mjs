@@ -13,6 +13,9 @@ export default defineConfig({
 		}),
 		starlight({
 			title: 'Arsen Melikyan',
+			editLink: {
+				baseUrl: 'https://github.com/bugron/bugron.github.io/edit/astro/',
+			},
 			customCss: [
 				'./src/styles/custom.css',
 			],
