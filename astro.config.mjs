@@ -3,7 +3,7 @@ import starlightBlog from 'starlight-blog'
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-	site: 'https://bugron.github.io',
+	site: 'https://melikyan.dev',
 	integrations: [
 		starlightBlog({
 			authors: {
