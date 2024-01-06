@@ -3,8 +3,10 @@ import starlightBlog from 'starlight-blog'
 import starlight from '@astrojs/starlight';
 import partytown from '@astrojs/partytown';
 
+const site = 'https://melikyan.dev/';
+
 export default defineConfig({
-	site: 'https://melikyan.dev',
+	site,
 	integrations: [
 		starlightBlog({
 			authors: {
@@ -50,6 +52,14 @@ gtag('js', new Date());
 
 gtag('config', 'G-EWP344X6RY');
 					`
+				},
+				{
+					tag: 'meta',
+					attrs: { property: 'og:image', content: site + 'og.png?v=1' },
+				},
+				{
+					tag: 'meta',
+					attrs: { property: 'twitter:image', content: site + 'og.png?v=1' },
 				},
 			],
 		}),
