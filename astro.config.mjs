@@ -15,6 +15,12 @@ export default defineConfig({
 		}),
 		starlight({
 			title: 'Arsen Melikyan',
+			favicon: '/favicon.ico',
+			logo: {
+				src: '/public/logo.png',
+				alt: 'Arsen Melikyan\'s personal blog logo',
+				replacesTitle: true,
+			},
 			editLink: {
 				baseUrl: 'https://github.com/bugron/bugron.github.io/edit/astro/',
 			},
