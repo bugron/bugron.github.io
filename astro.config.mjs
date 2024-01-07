@@ -33,7 +33,8 @@ export default defineConfig({
 				MarkdownContent: 'starlight-blog/overrides/MarkdownContent.astro',
 				Sidebar: 'starlight-blog/overrides/Sidebar.astro',
 				ThemeSelect: 'starlight-blog/overrides/ThemeSelect.astro',
-				TableOfContents: './src/components/TableOfContents.astro'
+				TableOfContents: './src/components/TableOfContents.astro',
+				Header: './src/components/Header.astro',
 			},
 			social: {
 				github: 'https://github.com/bugron',
