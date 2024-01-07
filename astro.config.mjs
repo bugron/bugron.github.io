@@ -10,7 +10,7 @@ export default defineConfig({
 	integrations: [
 		starlightBlog({
 			authors: {
-			  bugron: { name: 'Arsen Melikyan', title: 'Staff Software Engineer @ ServiceTitan', picture: 'https://avatars.githubusercontent.com/u/13225220?v=4', url: 'https://melikyan.dev' },
+			  bugron: { name: 'Arsen Melikyan', title: 'Staff Software Engineer @ ServiceTitan', picture: '/arsen-avatar.jpg', url: 'https://melikyan.dev' },
 			},
 		}),
 		starlight({
