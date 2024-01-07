@@ -3,6 +3,13 @@
     height: 18px;
 }
 
+/* This might possibly overwrite all hero images */
+.hero img {
+	@media screen and (max-width: 799px) {
+		max-width: 10rem;
+	}
+}
+
 /* Dark mode colors. */
 :root {
 	--sl-color-accent-low: #312100;
