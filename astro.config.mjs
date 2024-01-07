@@ -14,6 +14,7 @@ export default defineConfig({
 			},
 		}),
 		starlight({
+			lastUpdated: true,
 			title: 'Arsen Melikyan',
 			favicon: '/favicon.ico',
 			logo: {
