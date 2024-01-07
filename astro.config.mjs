@@ -17,7 +17,8 @@ export default defineConfig({
 			title: 'Arsen Melikyan',
 			favicon: '/favicon.ico',
 			logo: {
-				src: '/public/logo.png',
+				dark: '/public/logo-dark.png',
+				light: '/public/logo-light.png',
 				alt: 'Arsen Melikyan\'s personal blog logo',
 				replacesTitle: true,
 			},
