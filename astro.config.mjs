@@ -4,11 +4,10 @@ import starlight from '@astrojs/starlight';
 import partytown from '@astrojs/partytown';
 import compress from "astro-compress";
 import robotsTxt from "astro-robots-txt";
-
-const site = 'https://melikyan.dev/';
+import { BLOG_URL } from './src/contants';
 
 export default defineConfig({
-	site,
+	site: BLOG_URL,
 	integrations: [
 		starlightBlog({
 			authors: {
