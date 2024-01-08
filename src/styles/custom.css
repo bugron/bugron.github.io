@@ -10,6 +10,10 @@
 	}
 }
 
+.justify-center {
+    justify-content: center;
+}
+
 /* Dark mode colors. */
 :root {
 	--sl-color-accent-low: #312100;

@@ -1,0 +1,187 @@
+---
+title: Bisecting bugs with binary search
+date: 2024-01-12
+description: Fixing a full-text search bug I introduced in my blog
+tags:
+    - Git
+    - Blog
+    - Bugs
+authors: bugron
+---
+import { Image } from 'astro:assets';
+import mobileSearchUiImage from "../../../assets/bisecting-bugs-with-git/mobile-search-two-inputs.png";
+
+## The problem
+
+A couple of days ago while working on my blog, I found out that something wrong happened to the full-text site search UI. On desktop I couldn't see the search UI at all as seen in the following screenshot.
+
+![Desktop search UI missing](../../../assets/bisecting-bugs-with-git/desktop-search-missing.png)
+
+And mobile search UI looked pretty strange with two search inputs...
+
+<div class="sl-flex justify-center">
+    <Image src={mobileSearchUiImage} alt="Two search input in mobile view..." width="360px" />
+</div>
+
+OK, something wrong is going on and I need to get to the bottom of it. At the time I noticed the issue I was working on introducing [astro-compress][astroCompress] and an [RSS feed][rssFeed] to compress static assets after the build. I though that maybe during the compression something went wrong so I tried excluding `pagefind` ([Starlight][starlight] uses [Pagefind][pagefind] to seamlessly implement full-text site search):
+
+```js title="astro.config.mjs" ins={6-8}
+import compress from "astro-compress";
+
+export default defineConfig({
+	integrations: [
+        compress({
+            Exclude: [
+                file => file.includes('pagefind')
+            ]
+        }),
+	],
+});
+```
+
+Neither excluding these assets nor disabling the compression altogether helped. As I was running out of ideas what the issue could be it was high time to turn to Git bisect for help.
+
+## Bisecting with Git
+
+:::note
+As you'll see below `git bisect` was instrumental in finding the root cause of the issue. However, it's not a silver bullet. It's not always easy or even possible to bisect a bug. Especially, in those cases when commits are squashed at large and singular commits contain 30, 40, 100 files, etc. So to utilize this command to its best I recommend to commit often and commit small (atomic commits).
+:::
+
+### What is Git bisect?
+[git bisect][gitBisect] is (obviously) a git command that uses binary search to find the commit that introduced a bug. It does so by asking for `good` and `bad` commits and once these commits are identified it starts halving the number of commits to check until the commit that introduced the bug is found. Hence, binary search in the title of this article.
+
+### Locating and fixing the bug
+I know that the latest commit has the issue so it's time to start the bisecting process. To do that I needed to run the following command:
+
+```bash
+git bisect start
+```
+
+Here is the output of the command:
+
+```bash
+➜  bugron.github.io git:(test) git bisect start
+status: waiting for both good and bad commits
+➜  bugron.github.io git:(test) git bisect bad  
+status: waiting for good commit(s), bad commit known
+➜  bugron.github.io git:(test) 
+```
+
+Notice there was no need to `git bisect bad` as `git bisect start` already assumes that the current commit is `bad`. So we just need to find a `good` commit and to do that I went back to the last known good commit (by `git checkout`ing older commit and checking for the bug) and run `git bisect good`:
+
+```bash
+➜  bugron.github.io git:(test) git checkout 69da06aa1c9e2d620ac3ebba25ddf956c31d8cf5       
+Note: switching to '69da06aa1c9e2d620ac3ebba25ddf956c31d8cf5'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 69da06a Add light and dark logo variations
+
+➜  bugron.github.io git:(69da06a) git bisect good                             
+Bisecting: 2 revisions left to test after this (roughly 2 steps)
+[d1eef597555defb5c235013142a42c82fed8120b] Add lastUpdated config
+```
+
+As you can see above I've `git checkout`ed to the `69da06aa1c9e2d620ac3ebba25ddf956c31d8cf5` commit and as it did not contain the bug I marked it good with
+
+```bash
+git bisect good
+```
+
+and git immediately started the bisection process by checking out the `d1eef597555defb5c235013142a42c82fed8120b` commit and even showing a `rough` estimation of the number of remaining steps.
+
+Starting this point here is the algorithm:
+```
+1. Check if a commit contains the bug
+2. If it does mark it bad with `git bisect bad`
+3. If it does not mark it good with `git bisect good`
+4. Repeat steps 1-3 until the commit that introduced the bug is found
+```
+
+When `git` find the commit that introduced the bug it will output the following:
+
+```bash
+➜  bugron.github.io git:(fc71196) git bisect good
+fb05597e11b01673c133b977542c9360b9ad2619 is the first bad commit
+commit fb05597e11b01673c133b977542c9360b9ad2619
+Author: Arsen Melikyan <bugron@mail.ru>
+Date:   Sun Jan 7 19:41:24 2024 +0400
+
+    Enhance current header for mobile experience
+
+ astro.config.mjs            |   3 +-
+ src/components/Header.astro | 126 ++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 128 insertions(+), 1 deletion(-)
+ create mode 100644 src/components/Header.astro
+```
+
+Interesting. The `Enhance current header for mobile experience` commit is exactly where I did some changes to the header component but I didn't change the search functionality at all. Or so I thought...
+
+OK, let's see what this `bad` commit did with `git show fb05597e11b01673c133b977542c9360b9ad2619`. For the sake of brevity I won't show the whole output of the command but here is the relevant part:
+
+
+```diff title="git show fb05597e11b01673c133b977542c9360b9ad2619"
+diff --git a/src/components/Header.astro b/src/components/Header.astro
+new file mode 100644
+index 0000000..aaed8ae
+--- /dev/null
++++ b/src/components/Header.astro
++<div class="header sl-flex">
++       <div class="sl-flex">
++               <SiteTitle {...Astro.props} />
++       </div>
++    <div class="sl-flex right-group md:sl-hidden">
++        <div class="search">
++            <Search {...Astro.props} />
++        </div>
++        <div class="blog-link">
++            <a href="/blog">Blog</a>
++        </div>
++               <LanguageSelect {...Astro.props} />
++       </div>
++       <div class="sl-hidden md:sl-flex">
++               <Search {...Astro.props} />
++       </div>
++       <div class="sl-hidden md:sl-flex right-group">
++               <div class="sl-flex social-icons">
++                       <SocialIcons {...Astro.props} />
++               </div>
++        <div class="blog-link">
++            <a href="/blog">Blog</a>
++        </div>
++               <ThemeSelect {...Astro.props} />
++               <LanguageSelect {...Astro.props} />
++       </div>
++</div>
+```
+
+Hmm, at this moment all I have is assumptions but one thing I see is that I have two instances of `<Search />` (remember the mobile search UI had two search inputs?) one of them should only be visible in mobile view the other one in desktop view. 
+
+I mistakenly though that it would be OK to do this and then just use CSS to control the visibility of the search UI but Starlight had another idea so I attempted to remove the second instance of `<Search />` and that fixed the issue. Afterwards I simply polished the UI and [committed my changes][fixCommit]. Everything worked as expected and I deployed my changes 🚀
+
+## Conclusion
+
+git bisect is incredibly powerful tool for finding bugs if git is used correctly. It takes some discipline and practice to keep commits atomic and small but it's worth in the long run. I highly recommend it.
+
+I hope you found this article useful. Until next time 👋
+
+{/* URL section */}
+[rssFeed]: https://melikyan.dev/rss.xml
+[astroCompress]: https://www.npmjs.com/package/astro-compress/
+[pagefind]: https://pagefind.app/
+[starlight]: https://starlight.astro.build/
+[gitBisect]: https://git-scm.com/docs/git-bisect/
+[fixCommit]: https://github.com/bugron/bugron.github.io/commit/7240eb80e8c6ce16e79d1679bc064dabad04aac7/
