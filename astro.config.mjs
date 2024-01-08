@@ -2,6 +2,8 @@ import { defineConfig } from 'astro/config';
 import starlightBlog from 'starlight-blog'
 import starlight from '@astrojs/starlight';
 import partytown from '@astrojs/partytown';
+import compress from "astro-compress";
+import robotsTxt from "astro-robots-txt";
 
 const site = 'https://melikyan.dev/';
 
@@ -65,6 +67,8 @@ gtag('config', 'G-EWP344X6RY');
 				},
 			],
 		}),
+        compress(),
+        robotsTxt(),
 		partytown({
 			config: {
 			  forward: ["dataLayer.push"],
