@@ -12,25 +12,16 @@ import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
 	<div class="sl-flex">
 		<SiteTitle {...Astro.props} />
 	</div>
-    <div class="sl-flex right-group md:sl-hidden">
-        <div class="search">
-            <Search {...Astro.props} />
-        </div>
+    <div class="search sl-flex">
+        <Search {...Astro.props} />
         <div class="blog-link">
             <a href="/blog">Blog</a>
         </div>
-		<LanguageSelect {...Astro.props} />
-	</div>
-	<div class="sl-hidden md:sl-flex">
-		<Search {...Astro.props} />
-	</div>
+    </div>
 	<div class="sl-hidden md:sl-flex right-group">
 		<div class="sl-flex social-icons">
 			<SocialIcons {...Astro.props} />
 		</div>
-        <div class="blog-link">
-            <a href="/blog">Blog</a>
-        </div>
 		<ThemeSelect {...Astro.props} />
 		<LanguageSelect {...Astro.props} />
 	</div>
@@ -42,8 +33,7 @@ import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
         align-items: center;
         display: flex;
         height: 2rem;
-        padding-inline-end: 1rem;
-        gap: 1rem;
+        padding-inline-end: var(--sl-nav-gap);
     }
 
     @media (max-width: 50rem) {
@@ -54,20 +44,12 @@ import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
     }
 
     .search {
+        justify-content: space-between;
         align-items: center;
         display: flex;
         height: 2rem;
         gap: 1rem;
     }
-
-    @media (max-width: 50rem) {
-        .search::after {
-            content: '';
-            height: 2rem;
-            border-inline-end: 1px solid var(--sl-color-gray-5);
-        }
-    }
-
 
     a {
         color: var(--sl-color-text-accent);
@@ -91,6 +73,7 @@ import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
 		content: '';
 		height: 2rem;
 		border-inline-end: 1px solid var(--sl-color-gray-5);
+        margin-left: calc(var(--sl-nav-gap) - 1rem);
 	}
 
 	@media (min-width: 50rem) {
