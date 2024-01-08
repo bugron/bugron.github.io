@@ -35,6 +35,7 @@ export default defineConfig({
 				ThemeSelect: 'starlight-blog/overrides/ThemeSelect.astro',
 				TableOfContents: './src/components/TableOfContents.astro',
 				Header: './src/components/Header.astro',
+				Head: './src/components/Head.astro',
 			},
 			social: {
 				github: 'https://github.com/bugron',
@@ -61,14 +62,6 @@ gtag('js', new Date());
 
 gtag('config', 'G-EWP344X6RY');
 					`
-				},
-				{
-					tag: 'meta',
-					attrs: { property: 'og:image', content: site + 'og.png?v=1' },
-				},
-				{
-					tag: 'meta',
-					attrs: { property: 'twitter:image', content: site + 'og.png?v=1' },
 				},
 			],
 		}),
