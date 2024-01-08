@@ -43,6 +43,7 @@ export default defineConfig({
 				linkedin: 'https://www.linkedin.com/in/arsen-melikyan/',
 				'x.com': 'https://twitter.com/bugron1',
 				youtube: 'https://www.youtube.com/@bugron',
+                rss: `${BLOG_URL}/rss.xml`,
 			},
 			head: [
 				{
