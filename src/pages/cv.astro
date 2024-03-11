@@ -6,8 +6,13 @@ import { RESUME_DATA } from "../resume-data";
 
 import "@fontsource/inter";
 import "../components/cv/globals.css";
+
+const ogImage = "https://melikyan.dev/og/default.png?v=1";
 ---
 
+<meta property="og:image" content={ogImage} />
+<meta property="twitter:image" content={ogImage} />
+<meta name="author" content="Arsen Melikyan" />
 <main
   class="container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16"
 >
