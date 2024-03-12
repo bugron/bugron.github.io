@@ -168,10 +168,30 @@ export const RESUME_DATA = {
             title: "Armenian translation of javascript.info",
             techStack: ["Personal Project", "GitHub", "Markdown"],
             description:
-                "I currently manage the translation process of the well-known javascript.info",
+                "I used to manage the translation process of the well-known javascript.info, also translated some articles myself.",
             link: {
                 label: "github.com",
-                href: "https://jarocki.me/",
+                href: "https://github.com/javascript-tutorial/hy.javascript.info/",
+            },
+        },
+        {
+            title: "8thmind.com",
+            techStack: ["Ember.js", "Node.js", "MySQL", "DigitalOcean"],
+            description:
+                "I worked on both the front-end (Ember.js) and back-end (Node.js, MySQL) of the project.",
+            link: {
+                label: "8thmind.com",
+                href: "https://www.8thmind.com/",
+            },
+        },
+        {
+            title: "iorad.com",
+            techStack: ["React.js", "Chrome extension"],
+            description:
+                "I worked on both the front-end (React.js) app and a Chrome web extension.",
+            link: {
+                label: "8thmind.com",
+                href: "https://www.8thmind.com/",
             },
         },
     ],
