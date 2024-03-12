@@ -7,12 +7,34 @@ import { RESUME_DATA } from "../resume-data";
 import "@fontsource/inter";
 import "../components/cv/globals.css";
 
-const ogImage = "https://melikyan.dev/og/default.png?v=1";
+const ogImage = "https://melikyan.dev/og/cv.png?v=1";
 ---
 
-<meta property="og:image" content={ogImage} />
-<meta property="twitter:image" content={ogImage} />
+<title>Arsen Melikyan's CV</title>
+<meta name="title" content="Arsen Melikyan's CV" />
+<meta name="description" content="This page represents Arsen Melikyan's CV" />
 <meta name="author" content="Arsen Melikyan" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://melikyan.dev/cv/" />
+<meta property="og:title" content="Arsen Melikyan's CV" />
+<meta
+  property="og:description"
+  content="This page represents Arsen Melikyan's CV"
+/>
+<meta property="og:image" content={ogImage} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content="https://melikyan.dev/cv/" />
+<meta property="twitter:title" content="Arsen Melikyan's CV" />
+<meta
+  property="twitter:description"
+  content="This page represents Arsen Melikyan's CV"
+/>
+<meta property="twitter:image" content={ogImage} />
+
 <main
   class="container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16"
 >
