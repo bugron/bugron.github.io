@@ -1,16 +1,19 @@
 ---
-import type { Props } from '@astrojs/starlight/props';
+import type { Props } from "@astrojs/starlight/props";
 import DefaultHead from "@astrojs/starlight/components/Head.astro";
 
-const getBlogPostSlug = (articleSlug: string, customImageFileNameWithExt = '') => ({
-   [ `blog/${articleSlug}`]: `/og/blog/${customImageFileNameWithExt ? customImageFileNameWithExt : articleSlug + '.png'}?v=1`
+const getBlogPostSlug = (
+    articleSlug: string,
+    customImageFileNameWithExt = ""
+) => ({
+    [`blog/${articleSlug}`]: `/og/blog/${customImageFileNameWithExt ? customImageFileNameWithExt : articleSlug + ".png"}?v=1`,
 });
-const defaultOgImage = '/og/default.png?v=1';
+const defaultOgImage = "/og/default.png?v=1";
 
 const ogImages: Record<string, string> = {
-    ...getBlogPostSlug('how-to-quickly-setup-a-blog'),
-    ...getBlogPostSlug('bisecting-bugs-with-git'),
-}
+    ...getBlogPostSlug("how-to-quickly-setup-a-blog"),
+    ...getBlogPostSlug("bisecting-bugs-with-git"),
+};
 
 const ogImage = ogImages[Astro.props.slug] ?? defaultOgImage;
 ---

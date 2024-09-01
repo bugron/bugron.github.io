@@ -8,7 +8,8 @@ tags:
     - Bugs
 authors: bugron
 ---
-import { Image } from 'astro:assets';
+
+import { Image } from "astro:assets";
 import mobileSearchUiImage from "../../../assets/bisecting-bugs-with-git/mobile-search-two-inputs.png";
 
 ## The problem
@@ -20,7 +21,11 @@ A couple of days ago while working on my blog, I found out that the full-text si
 And mobile search UI looked pretty strange with two search inputs...
 
 <div class="sl-flex justify-center">
-    <Image src={mobileSearchUiImage} alt="Two search input in mobile view..." width="360px" />
+    <Image
+        src={mobileSearchUiImage}
+        alt="Two search input in mobile view..."
+        width="360px"
+    />
 </div>
 
 Something was wrong and I needed to get to the bottom of it. At the time I noticed the issue I was setting up [astro-compress][astroCompress] to compress static assets after the build. I thought maybe something went wrong during the compression so I tried excluding `pagefind` ([Starlight][starlight] uses [Pagefind][pagefind] to implement full-text site search):
@@ -29,13 +34,11 @@ Something was wrong and I needed to get to the bottom of it. At the time I notic
 import compress from "astro-compress";
 
 export default defineConfig({
-	integrations: [
+    integrations: [
         compress({
-            Exclude: [
-                file => file.includes('pagefind')
-            ]
+            Exclude: [(file) => file.includes("pagefind")],
         }),
-	],
+    ],
 });
 ```
 
@@ -50,6 +53,7 @@ As you'll see below `git bisect` was instrumental in finding the root cause of t
 [git bisect][gitBisect] is (obviously) a git command that uses binary search to find the commit that introduced a bug. It does so by asking for `good` and `bad` commits and once these commits are identified it starts halving the commits between these until the commit that introduced the bug is found.
 
 ### Locating and fixing the bug
+
 I knew that the latest commit had the bug so it was time to start the bisecting process so I ran the following command in the terminal:
 
 ```bash
@@ -61,14 +65,14 @@ Here is the output of the command:
 ```bash
 ➜  bugron.github.io git:(test) git bisect start
 status: waiting for both good and bad commits
-➜  bugron.github.io git:(test) git bisect bad  
+➜  bugron.github.io git:(test) git bisect bad
 status: waiting for good commit(s), bad commit known
 ```
 
 Notice there is no need to mark the very first commit as `bad` when starting to bisect as `git bisect start` already assumes that the current commit is `bad`. All I needed was to find a `good` commit and to do that I went back to the last known good commit (by `git checkout`ing older commits and checking for the existence of the bug) and ran `git bisect good`:
 
 ```bash
-➜  bugron.github.io git:(test) git checkout 69da06aa1c9e2d620ac3ebba25ddf956c31d8cf5       
+➜  bugron.github.io git:(test) git checkout 69da06aa1c9e2d620ac3ebba25ddf956c31d8cf5
 Note: switching to '69da06aa1c9e2d620ac3ebba25ddf956c31d8cf5'.
 
 You are in 'detached HEAD' state. You can look around, make experimental
@@ -88,7 +92,7 @@ Turn off this advice by setting config variable advice.detachedHead to false
 
 HEAD is now at 69da06a Add light and dark logo variations
 
-➜  bugron.github.io git:(69da06a) git bisect good                             
+➜  bugron.github.io git:(69da06a) git bisect good
 Bisecting: 2 revisions left to test after this (roughly 2 steps)
 [d1eef597555defb5c235013142a42c82fed8120b] Add lastUpdated config
 ```
@@ -96,6 +100,7 @@ Bisecting: 2 revisions left to test after this (roughly 2 steps)
 As you can see above I've `git checkout`ed to the `69da06aa1c9e2d620ac3ebba25ddf956c31d8cf5` commit and as it did not contain the bug I marked it as a good commit with `git bisect good`. Git immediately started the bisection process by checking out the `d1eef597555defb5c235013142a42c82fed8120b` commit and even showing a `rough` estimation of the number of remaining steps.
 
 From now on here is the algorithm I followed:
+
 ```
 1. Check if a commit contains the bug
 2. If it does mark it bad with `git bisect bad`
@@ -123,7 +128,6 @@ Date:   Sun Jan 7 19:41:24 2024 +0400
 Interesting. The `Enhance current header for mobile experience` commit is exactly where I made some changes to the header component but I didn't change the search functionality at all. Or so I thought...
 
 OK, let's see what this `bad` commit did with `git show fb05597e11b01673c133b977542c9360b9ad2619`. For the sake of brevity I won't show the whole output of the command but here is the relevant part:
-
 
 ```diff title="git show fb05597e11b01673c133b977542c9360b9ad2619" {12,20}
 diff --git a/src/components/Header.astro b/src/components/Header.astro
@@ -160,7 +164,7 @@ index 0000000..aaed8ae
 +</div>
 ```
 
-Hmm, at this moment all I had were assumptions but one thing I saw was I had two "instances" of `<Search />` (remember the mobile search UI had two search inputs?) one of them should only be visible in mobile view the other one in desktop view. 
+Hmm, at this moment all I had were assumptions but one thing I saw was I had two "instances" of `<Search />` (remember the mobile search UI had two search inputs?) one of them should only be visible in mobile view the other one in desktop view.
 
 I mistakenly thought that it would be OK to do this and then just use CSS to control the visibility of the search UI but Starlight had another idea so I attempted to remove the second instance of `<Search />` and that fixed the issue. Afterwards, I simply polished the UI and [committed my changes][fixCommit]. Everything worked as expected and I deployed my changes 🚀
 

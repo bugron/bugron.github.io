@@ -19,11 +19,11 @@ If you're interested in following my journey I invite you to read this article.
 
 Here is the list of tech I used to create this blog:
 
-- [Astro][astro] - "a web framework for content-driven websites"
-- [Starlight][starlight] - an Astro template for building documentation websites
-- [GitHub Pages][githubPages] - a static site hosting service that takes HTML, CSS, and JavaScript files straight from a repository on GitHub. Conveniently, GitHub Pages supports custom domains, HTTPS, etc. and comes included in any GitHub plan.
-- [GitHub Actions][githubActions] - a CI/CD tool that helps you automate your software development workflows
-- [Google Analytics][googleAnalytics] - a web analytics service offered by Google that tracks and reports website traffic
+-   [Astro][astro] - "a web framework for content-driven websites"
+-   [Starlight][starlight] - an Astro template for building documentation websites
+-   [GitHub Pages][githubPages] - a static site hosting service that takes HTML, CSS, and JavaScript files straight from a repository on GitHub. Conveniently, GitHub Pages supports custom domains, HTTPS, etc. and comes included in any GitHub plan.
+-   [GitHub Actions][githubActions] - a CI/CD tool that helps you automate your software development workflows
+-   [Google Analytics][googleAnalytics] - a web analytics service offered by Google that tracks and reports website traffic
 
 ### Astro
 
@@ -36,6 +36,7 @@ npm create astro@latest
 ```
 
 ### Starlight
+
 Instead of vanilla Astro I opted in using [Starlight][starlight] that is an official "wrapper" on top of it for building documentation websites (similar to [Docusaurus][docusaurus] and others). Interestingly, Starlight is just a template for Astro that you can install with the same Astro CLI:
 
 ```bash
@@ -49,6 +50,7 @@ I also found out that [starlight-blog][starlightBlog] package seamlessly adds bl
 BTW I used Starlight's [theme editor][starlightThemeEditor] to customize the colors of my blog. It's pretty neat.
 
 ### GitHub Pages
+
 I decided to go with [GitHub Pages][githubPages] as a hosting provider for the blog because it's easy to setup and maintain, and it supports custom domains and HTTPS. I also use GitHub for my code so it was a natural choice for me.
 
 I've never used custom domains with GitHub Pages before so I had to do some research. I found [this article][githubPagesCustomApexDomain] in GitHub docs that explains how to do it. It's pretty straightforward.
@@ -61,13 +63,14 @@ In case you're asking why Porkbun not only they provide good service they're als
 
 ![Porkbun's "warning" :)](../../../assets/how-to-quickly-setup-a-blog/porkbun.png)
 
-As I previously had something deployed to [bugron.github.io][blogGithubUrl] from the `main` branch and I wanted to use GitHub Actions to deploy my blog I had to change the source in GitHub Pages to `GitHub Actions`. 
+As I previously had something deployed to [bugron.github.io][blogGithubUrl] from the `main` branch and I wanted to use GitHub Actions to deploy my blog I had to change the source in GitHub Pages to `GitHub Actions`.
 
 Additionally, I updated the deployment branch rule of `github-pages` environment (you can find environments in repository settings, `Environments` under the `Code and automation` section) to point to the new `astro` branch otherwise the deployment simply wouldn't happen 🤷‍♂️
 
 Now we're all set to actually deploy our blog to GitHub Pages.
 
 ### GitHub Actions
+
 Astro conveniently provides [a guide][astroGithubActions] on how to deploy an Astro static site to GitHub Pages using [GitHub Actions][githubActions].
 
 Now for the `lastUpdated` configuration to work as expected we want to fetch the whole git history so we need to slightly modify the [provided workflow][astroGithubActions]:
@@ -76,38 +79,38 @@ Now for the `lastUpdated` configuration to work as expected we want to fetch the
 name: Deploy Astro blog to GitHub Pages
 
 on:
-  # Trigger the workflow every time you push to the `main` branch
-  # Using a different branch name? Replace `main` with your branch’s name
-  push:
-    branches: [ astro ]
-  # Allows you to run this workflow manually from the Actions tab on GitHub.
-  workflow_dispatch:
+    # Trigger the workflow every time you push to the `main` branch
+    # Using a different branch name? Replace `main` with your branch’s name
+    push:
+        branches: [astro]
+    # Allows you to run this workflow manually from the Actions tab on GitHub.
+    workflow_dispatch:
 
 # Allow this job to clone the repo and create a page deployment
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+    contents: read
+    pages: write
+    id-token: write
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Only a single commit is fetched by default, for the ref/SHA that triggered the workflow. Set fetch-depth: 0 to fetch all history for all branches and tags
-      - name: Install, build, and upload your site
-        uses: withastro/action@v1
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0 # Only a single commit is fetched by default, for the ref/SHA that triggered the workflow. Set fetch-depth: 0 to fetch all history for all branches and tags
+            - name: Install, build, and upload your site
+              uses: withastro/action@v1
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        steps:
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v1
 ```
 
 After adding the deployment workflow file I committed it to the `astro` branch and pushed it to GitHub. The workflow started automatically and after a a minute or so my blog was live at [melikyan.dev][blogUrl].
