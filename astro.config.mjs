@@ -6,6 +6,7 @@ import compress from "astro-compress";
 import robotsTxt from "astro-robots-txt";
 import { BLOG_URL } from "./src/constants";
 import tailwind from "@astrojs/tailwind";
+import starlightImageZoom from "starlight-image-zoom";
 
 // https://astro.build/config
 export default defineConfig({
@@ -26,6 +27,7 @@ export default defineConfig({
                         },
                     },
                 }),
+                starlightImageZoom(),
             ],
             logo: {
                 dark: "/public/logo-dark.png",
@@ -40,7 +42,7 @@ export default defineConfig({
             customCss: ["./src/styles/custom.css"],
             components: {
                 MarkdownContent:
-                    "starlight-blog/overrides/MarkdownContent.astro",
+                    "./src/components/overrides/MarkdownContent.astro",
                 Sidebar: "starlight-blog/overrides/Sidebar.astro",
                 ThemeSelect: "starlight-blog/overrides/ThemeSelect.astro",
                 TableOfContents: "./src/components/TableOfContents.astro",
