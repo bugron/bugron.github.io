@@ -138,17 +138,37 @@ export const RESUME_DATA = {
             title: "melikyan.dev",
             techStack: ["Personal Project", "Astro", "Starlight", "TypeScript"],
             description:
-                "My personal website and blog. Built with Astro and Starlight",
+                "My personal website and blog. Built with Astro and Starlight.",
             link: {
                 label: "melikyan.dev",
                 href: "https://melikyan.dev/",
             },
         },
         {
+            title: "PR Visualizer",
+            techStack: ["Personal Project", "Next.js", "TypeScript"],
+            description:
+                "This tool reveals the connections between different PRs in the same repo and helps with keeping track of chain PRs.",
+            link: {
+                label: "github.com",
+                href: "https://github.com/bugron/pr-visualizer/",
+            },
+        },
+        {
+            title: "@bugron/validate-dependabot-yaml",
+            techStack: ["Personal Project", "TypeScrpit", "Node.js", "CLI"],
+            description:
+                "A CLI that tests Dependabot configuration files against the official v2 JSON schema for validation errors.",
+            link: {
+                label: "github.com",
+                href: "https://github.com/bugron/validate-dependabot-cli/",
+            },
+        },
+        {
             title: "Offline registry for npm",
             techStack: ["Personal Project", "JavaScript", "Node.js", "Express"],
             description:
-                "Local npm registry server based on already installed packages in the registry's node_modules folder",
+                "Local npm registry server based on already installed packages in the registry's node_modules folder.",
             link: {
                 label: "github.com",
                 href: "https://github.com/bugron/npm-offline-registry/",
@@ -158,7 +178,7 @@ export const RESUME_DATA = {
             title: "Awesome ArmDevs",
             techStack: ["Personal Project", "GitHub", "Markdown"],
             description:
-                "A curated list of YouTube channels, GitHub handles, and personal blogs of Armenian developers who create educational content",
+                "A curated list of YouTube channels, GitHub handles, and personal blogs of Armenian developers who create educational content.",
             link: {
                 label: "github.com",
                 href: "https://github.com/bugron/awesome-armdevs",
@@ -172,6 +192,30 @@ export const RESUME_DATA = {
             link: {
                 label: "github.com",
                 href: "https://github.com/javascript-tutorial/hy.javascript.info/",
+            },
+        },
+        {
+            title: "Microsoft terminology search extension",
+            techStack: ["Personal Project", "GitHub", "VSCode extension"],
+            description:
+                "A simple Extension for VSCode to search easily using Microsoft Terminology Search",
+            link: {
+                label: "github.com",
+                href: "https://github.com/bugron/microsoft-terminology-search/",
+            },
+        },
+        {
+            title: "Quiz Mobile App",
+            techStack: [
+                "Personal Project",
+                "TypeScript",
+                "React Native",
+                "Expo",
+            ],
+            description: "",
+            link: {
+                label: "github.com",
+                href: "https://github.com/bugron/defense-questionnaire-mobile-app/",
             },
         },
         {
