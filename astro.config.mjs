@@ -4,7 +4,7 @@ import starlight from "@astrojs/starlight";
 import partytown from "@astrojs/partytown";
 import compress from "astro-compress";
 import robotsTxt from "astro-robots-txt";
-import { BLOG_URL } from "./src/contants";
+import { BLOG_URL } from "./src/constants";
 import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
