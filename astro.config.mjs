@@ -9,22 +9,24 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-    site: BLOG_URL,
+    site: import.meta.env.DEV ? "http://localhost:4321/" : BLOG_URL,
     integrations: [
-        starlightBlog({
-            authors: {
-                bugron: {
-                    name: "Arsen Melikyan",
-                    title: "Staff Software Engineer @ ServiceTitan",
-                    picture: "/arsen-avatar.jpg",
-                    url: "https://melikyan.dev",
-                },
-            },
-        }),
         starlight({
             lastUpdated: true,
             title: "Arsen Melikyan",
             favicon: "/favicon.ico",
+            plugins: [
+                starlightBlog({
+                    authors: {
+                        bugron: {
+                            name: "Arsen Melikyan",
+                            title: "Staff Software Engineer @ ServiceTitan",
+                            picture: "/arsen-avatar.jpg",
+                            url: "https://melikyan.dev",
+                        },
+                    },
+                }),
+            ],
             logo: {
                 dark: "/public/logo-dark.png",
                 light: "/public/logo-light.png",
@@ -50,7 +52,6 @@ export default defineConfig({
                 linkedin: "https://www.linkedin.com/in/arsen-melikyan/",
                 "x.com": "https://twitter.com/bugron1",
                 youtube: "https://www.youtube.com/@bugron",
-                rss: `${BLOG_URL}/rss.xml`,
             },
             head: [
                 {
