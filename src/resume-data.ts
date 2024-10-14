@@ -149,6 +149,19 @@ export const RESUME_DATA = {
             },
         },
         {
+            title: "search.melikyan.dev",
+            techStack: [
+                { name: "Node.js", url: "https://nodejs.org/" },
+                { name: "pagefind", url: "https://pagefind.app/" },
+            ],
+            description:
+                "Aggregated search of cooperpress.com, bytes.dev and thisweekinreact.com publications starting 2020.",
+            link: {
+                label: "search.melikyan.dev",
+                href: "https://search.melikyan.dev/",
+            },
+        },
+        {
             title: "PR Visualizer",
             techStack: [
                 { name: "Next.js", url: "https://nextjs.org/" },
