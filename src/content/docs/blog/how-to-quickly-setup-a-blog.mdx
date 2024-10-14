@@ -11,7 +11,7 @@ tags:
 authors: bugron
 ---
 
-import AllPackageManagers from '../../../components/AllPackageManagers.astro'
+import AllPackageManagers from "../../../components/AllPackageManagers.astro";
 
 I've been delaying setting up my personal blog for so long that a few days ago I finally decided to do something about it 😅 And I'm glad I did because I finally got my hands dirty with [Astro][astro] and [Starlight][starlight] for the first time.
 
@@ -33,13 +33,17 @@ Here is the list of tech I used to create this blog:
 
 It's very easy to start a new Astro project with their CLI:
 
-<AllPackageManagers pkg="astro@latest" type='create' />
+<AllPackageManagers pkg="astro@latest" type="create" />
 
 ### Starlight
 
 Instead of vanilla Astro I opted in using [Starlight][starlight] that is an official "wrapper" on top of it for building documentation websites (similar to [Docusaurus][docusaurus] and others). Interestingly, Starlight is just a template for Astro that you can install with the same Astro CLI:
 
-<AllPackageManagers pkg="astro@latest" type='create' args='--template starlight' />
+<AllPackageManagers
+    pkg="astro@latest"
+    type="create"
+    args="--template starlight"
+/>
 
 I also found out that [starlight-blog][starlightBlog] package seamlessly adds blogging capabilities. Starlight's stellar (pun intended) features like [i18n][mdni18n], [full-text site search][starlightSiteSearch], visual mode switch, and many more are all supported out of box. That meant less work for me to get the blog going so I was sold right away.
 
