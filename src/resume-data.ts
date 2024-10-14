@@ -155,6 +155,16 @@ export const RESUME_DATA = {
             },
         },
         {
+            title: "URL Redirector 2",
+            techStack: ["Personal Project", "Preact", "TypeScript", "Vite", "Chrome extension"],
+            description:
+                "A Chrome extension for local or remote URL redirection.",
+            link: {
+                label: "github.com",
+                href: "https://github.com/bugron/url-redirector-2/",
+            },
+        },
+        {
             title: "@bugron/validate-dependabot-yaml",
             techStack: ["Personal Project", "TypeScrpit", "Node.js", "CLI"],
             description:
