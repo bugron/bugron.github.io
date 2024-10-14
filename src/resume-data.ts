@@ -136,7 +136,11 @@ export const RESUME_DATA = {
     projects: [
         {
             title: "melikyan.dev",
-            techStack: ["Astro", "Starlight", "TypeScript"],
+            techStack: [
+                { name: "Astro", url: "https://astro.build/" },
+                { name: "Starlight", url: "https://starlight.astro.build/" },
+                { name: "TypeScript", url: "https://www.typescriptlang.org/" },
+            ],
             description:
                 "My personal website and blog. Built with Astro and Starlight.",
             link: {
@@ -146,7 +150,11 @@ export const RESUME_DATA = {
         },
         {
             title: "PR Visualizer",
-            techStack: ["Next.js", "@xyflow/react", "TypeScript"],
+            techStack: [
+                { name: "Next.js", url: "https://nextjs.org/" },
+                { name: "@xyflow/react", url: "https://reactflow.dev/" },
+                { name: "TypeScript", url: "https://www.typescriptlang.org/" },
+            ],
             description:
                 "This tool reveals the connections between different PRs in the same repo and helps with keeping track of chain PRs.",
             link: {
@@ -156,7 +164,15 @@ export const RESUME_DATA = {
         },
         {
             title: "URL Redirector 2",
-            techStack: ["Preact", "TypeScript", "Vite", "Chrome extension"],
+            techStack: [
+                { name: "Preact", url: "https://preactjs.com/" },
+                { name: "TypeScript", url: "https://www.typescriptlang.org/" },
+                { name: "Vite", url: "https://vitejs.dev/" },
+                {
+                    name: "Chrome extension",
+                    url: "https://developer.chrome.com/docs/extensions/",
+                },
+            ],
             description:
                 "A Chrome extension for local or remote URL redirection.",
             link: {
@@ -166,7 +182,14 @@ export const RESUME_DATA = {
         },
         {
             title: "@bugron/validate-dependabot-yaml",
-            techStack: ["TypeScrpit", "Node.js", "CLI"],
+            techStack: [
+                { name: "TypeScript", url: "https://www.typescriptlang.org/" },
+                { name: "Node.js", url: "https://nodejs.org/" },
+                {
+                    name: "CLI",
+                    url: "https://en.wikipedia.org/wiki/Command-line_interface",
+                },
+            ],
             description:
                 "A CLI that tests Dependabot configuration files against the official v2 JSON schema for validation errors.",
             link: {
@@ -176,7 +199,14 @@ export const RESUME_DATA = {
         },
         {
             title: "Offline registry for npm",
-            techStack: ["JavaScript", "Node.js", "Express"],
+            techStack: [
+                {
+                    name: "JavaScript",
+                    url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+                },
+                { name: "Node.js", url: "https://nodejs.org/" },
+                { name: "Express", url: "https://expressjs.com/" },
+            ],
             description:
                 "Local npm registry server based on already installed packages in the registry's node_modules folder.",
             link: {
@@ -186,7 +216,13 @@ export const RESUME_DATA = {
         },
         {
             title: "Awesome ArmDevs",
-            techStack: ["GitHub", "Markdown"],
+            techStack: [
+                { name: "GitHub", url: "https://github.com/" },
+                {
+                    name: "Markdown",
+                    url: "https://daringfireball.net/projects/markdown/",
+                },
+            ],
             description:
                 "A curated list of YouTube channels, GitHub handles, and personal blogs of Armenian developers who create educational content.",
             link: {
@@ -196,7 +232,13 @@ export const RESUME_DATA = {
         },
         {
             title: "Armenian translation of javascript.info",
-            techStack: ["GitHub", "Markdown"],
+            techStack: [
+                { name: "GitHub", url: "https://github.com/" },
+                {
+                    name: "Markdown",
+                    url: "https://daringfireball.net/projects/markdown/",
+                },
+            ],
             description:
                 "I used to manage the translation process of the well-known javascript.info, also translated some articles myself.",
             link: {
@@ -206,7 +248,13 @@ export const RESUME_DATA = {
         },
         {
             title: "Microsoft terminology search extension",
-            techStack: ["GitHub", "VSCode extension"],
+            techStack: [
+                { name: "GitHub", url: "https://github.com/" },
+                {
+                    name: "VSCode extension",
+                    url: "https://code.visualstudio.com/api",
+                },
+            ],
             description:
                 "A simple Extension for VSCode to search easily using Microsoft Terminology Search",
             link: {
@@ -217,9 +265,9 @@ export const RESUME_DATA = {
         {
             title: "Quiz Mobile App",
             techStack: [
-                "TypeScript",
-                "React Native",
-                "Expo",
+                { name: "TypeScript", url: "https://www.typescriptlang.org/" },
+                { name: "React Native", url: "https://reactnative.dev/" },
+                { name: "Expo", url: "https://expo.dev/" },
             ],
             description: "",
             link: {
@@ -229,7 +277,12 @@ export const RESUME_DATA = {
         },
         {
             title: "8thmind.com",
-            techStack: ["Ember.js", "Node.js", "MySQL", "DigitalOcean"],
+            techStack: [
+                { name: "Ember.js", url: "https://emberjs.com/" },
+                { name: "Node.js", url: "https://nodejs.org/" },
+                { name: "MySQL", url: "https://www.mysql.com/" },
+                { name: "DigitalOcean", url: "https://www.digitalocean.com/" },
+            ],
             description:
                 "I worked on both the front-end (Ember.js) and back-end (Node.js, MySQL) of the project.",
             link: {
@@ -239,7 +292,13 @@ export const RESUME_DATA = {
         },
         {
             title: "iorad.com",
-            techStack: ["React.js", "Chrome extension"],
+            techStack: [
+                { name: "React.js", url: "https://reactjs.org/" },
+                {
+                    name: "Chrome extension",
+                    url: "https://developer.chrome.com/docs/extensions/",
+                },
+            ],
             description:
                 "I worked on both the front-end (React.js) app and a Chrome web extension.",
             link: {
