@@ -136,7 +136,7 @@ export const RESUME_DATA = {
     projects: [
         {
             title: "melikyan.dev",
-            techStack: ["Personal Project", "Astro", "Starlight", "TypeScript"],
+            techStack: ["Astro", "Starlight", "TypeScript"],
             description:
                 "My personal website and blog. Built with Astro and Starlight.",
             link: {
@@ -146,7 +146,7 @@ export const RESUME_DATA = {
         },
         {
             title: "PR Visualizer",
-            techStack: ["Personal Project", "Next.js", "TypeScript"],
+            techStack: ["Next.js", "@xyflow/react", "TypeScript"],
             description:
                 "This tool reveals the connections between different PRs in the same repo and helps with keeping track of chain PRs.",
             link: {
@@ -156,7 +156,7 @@ export const RESUME_DATA = {
         },
         {
             title: "URL Redirector 2",
-            techStack: ["Personal Project", "Preact", "TypeScript", "Vite", "Chrome extension"],
+            techStack: ["Preact", "TypeScript", "Vite", "Chrome extension"],
             description:
                 "A Chrome extension for local or remote URL redirection.",
             link: {
@@ -166,7 +166,7 @@ export const RESUME_DATA = {
         },
         {
             title: "@bugron/validate-dependabot-yaml",
-            techStack: ["Personal Project", "TypeScrpit", "Node.js", "CLI"],
+            techStack: ["TypeScrpit", "Node.js", "CLI"],
             description:
                 "A CLI that tests Dependabot configuration files against the official v2 JSON schema for validation errors.",
             link: {
@@ -176,7 +176,7 @@ export const RESUME_DATA = {
         },
         {
             title: "Offline registry for npm",
-            techStack: ["Personal Project", "JavaScript", "Node.js", "Express"],
+            techStack: ["JavaScript", "Node.js", "Express"],
             description:
                 "Local npm registry server based on already installed packages in the registry's node_modules folder.",
             link: {
@@ -186,7 +186,7 @@ export const RESUME_DATA = {
         },
         {
             title: "Awesome ArmDevs",
-            techStack: ["Personal Project", "GitHub", "Markdown"],
+            techStack: ["GitHub", "Markdown"],
             description:
                 "A curated list of YouTube channels, GitHub handles, and personal blogs of Armenian developers who create educational content.",
             link: {
@@ -196,7 +196,7 @@ export const RESUME_DATA = {
         },
         {
             title: "Armenian translation of javascript.info",
-            techStack: ["Personal Project", "GitHub", "Markdown"],
+            techStack: ["GitHub", "Markdown"],
             description:
                 "I used to manage the translation process of the well-known javascript.info, also translated some articles myself.",
             link: {
@@ -206,7 +206,7 @@ export const RESUME_DATA = {
         },
         {
             title: "Microsoft terminology search extension",
-            techStack: ["Personal Project", "GitHub", "VSCode extension"],
+            techStack: ["GitHub", "VSCode extension"],
             description:
                 "A simple Extension for VSCode to search easily using Microsoft Terminology Search",
             link: {
@@ -217,7 +217,6 @@ export const RESUME_DATA = {
         {
             title: "Quiz Mobile App",
             techStack: [
-                "Personal Project",
                 "TypeScript",
                 "React Native",
                 "Expo",
