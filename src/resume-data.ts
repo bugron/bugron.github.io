@@ -243,8 +243,8 @@ export const RESUME_DATA = {
             description:
                 "I worked on both the front-end (React.js) app and a Chrome web extension.",
             link: {
-                label: "8thmind.com",
-                href: "https://www.8thmind.com/",
+                label: "iorad.com",
+                href: "https://www.iorad.com/",
             },
         },
     ],
