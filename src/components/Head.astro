@@ -1,5 +1,4 @@
 ---
-import type { Props } from "@astrojs/starlight/props";
 import DefaultHead from "@astrojs/starlight/components/Head.astro";
 
 const getBlogPostSlug = (
@@ -15,7 +14,8 @@ const ogImages: Record<string, string> = {
     ...getBlogPostSlug("bisecting-bugs-with-git"),
 };
 
-const ogImage = ogImages[Astro.props.slug] ?? defaultOgImage;
+const { id } = Astro.locals.starlightRoute;
+const ogImage = ogImages[id] ?? defaultOgImage;
 ---
 
 <meta property="og:image" content={ogImage} />
@@ -27,4 +27,4 @@ const ogImage = ogImages[Astro.props.slug] ?? defaultOgImage;
     title="Arsen Melikyan's Blog RSS Feed"
     href={new URL("rss.xml", Astro.site)}
 />
-<DefaultHead {...Astro.props} />
+<DefaultHead />

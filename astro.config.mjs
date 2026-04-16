@@ -5,13 +5,16 @@ import partytown from "@astrojs/partytown";
 import compress from "astro-compress";
 import robotsTxt from "astro-robots-txt";
 import { BLOG_URL } from "./src/constants";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import starlightImageZoom from "starlight-image-zoom";
 import starlightLinksValidator from "starlight-links-validator";
 
 // https://astro.build/config
 export default defineConfig({
     site: import.meta.env.DEV ? "http://localhost:4321/" : BLOG_URL,
+    vite: {
+        plugins: [tailwindcss()],
+    },
     integrations: [
         starlight({
             lastUpdated: true,
@@ -29,7 +32,9 @@ export default defineConfig({
                     },
                 }),
                 starlightImageZoom(),
-                starlightLinksValidator(),
+                starlightLinksValidator({
+                    exclude: ["/blog/"],
+                }),
             ],
             logo: {
                 dark: "/public/logo-dark.png",
@@ -45,18 +50,33 @@ export default defineConfig({
             components: {
                 MarkdownContent:
                     "./src/components/overrides/MarkdownContent.astro",
-                Sidebar: "starlight-blog/overrides/Sidebar.astro",
-                ThemeSelect: "starlight-blog/overrides/ThemeSelect.astro",
+                ThemeSelect: "starlight-blog/components/ThemeSelect.astro",
                 TableOfContents: "./src/components/TableOfContents.astro",
                 Header: "./src/components/Header.astro",
                 Head: "./src/components/Head.astro",
             },
-            social: {
-                github: "https://github.com/bugron",
-                linkedin: "https://www.linkedin.com/in/arsen-melikyan/",
-                "x.com": "https://twitter.com/bugron1",
-                youtube: "https://www.youtube.com/@bugron",
-            },
+            social: [
+                {
+                    icon: "github",
+                    label: "GitHub",
+                    href: "https://github.com/bugron",
+                },
+                {
+                    icon: "linkedin",
+                    label: "LinkedIn",
+                    href: "https://www.linkedin.com/in/arsen-melikyan/",
+                },
+                {
+                    icon: "x.com",
+                    label: "X",
+                    href: "https://twitter.com/bugron1",
+                },
+                {
+                    icon: "youtube",
+                    label: "YouTube",
+                    href: "https://www.youtube.com/@bugron",
+                },
+            ],
             head: [
                 {
                     tag: "script",
@@ -68,7 +88,9 @@ export default defineConfig({
                 },
                 {
                     tag: "script",
-                    type: "text/partytown",
+                    attrs: {
+                        type: "text/partytown",
+                    },
                     content: `
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
@@ -86,6 +108,5 @@ gtag('config', 'G-EWP344X6RY');
                 forward: ["dataLayer.push"],
             },
         }),
-        tailwind(),
     ],
 });

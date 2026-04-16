@@ -15,26 +15,29 @@
         "@astrojs/check": "^0.9.8",
         "@astrojs/partytown": "^2.1.7",
         "@astrojs/rss": "^4.0.18",
-        "@astrojs/starlight": "^0.28.6",
-        "@astrojs/tailwind": "^5.1.5",
+        "@astrojs/starlight": "^0.38.3",
         "@fontsource/inter": "^5.2.8",
-        "astro": "^4.16.19",
+        "@lucide/astro": "^1.8.0",
+        "@tailwindcss/vite": "^4.2.2",
+        "astro": "^6.1.7",
         "astro-compress": "^2.4.1",
         "astro-robots-txt": "^1.0.0",
-        "lucide-astro": "^0.452.0",
         "markdown-it": "^14.1.1",
         "sanitize-html": "^2.17.3",
-        "sharp": "^0.33.5",
-        "starlight-blog": "^0.13.0",
-        "starlight-image-zoom": "^0.8.0",
-        "starlight-links-validator": "^0.12.4",
-        "starlight-package-managers": "^0.7.0",
-        "tailwindcss": "^3.4.19",
+        "sharp": "^0.34.5",
+        "starlight-blog": "^0.26.1",
+        "starlight-image-zoom": "^0.14.1",
+        "starlight-links-validator": "^0.23.0",
+        "starlight-package-managers": "^0.12.0",
+        "tailwindcss": "^4.2.2",
         "typescript": "^5.9.3"
     },
     "devDependencies": {
         "@types/markdown-it": "^14.1.2",
         "@types/sanitize-html": "^2.16.1",
         "prettier": "^3.8.3"
+    },
+    "overrides": {
+        "vite": "^7.3.1"
     }
 }

@@ -1,21 +1,21 @@
 ---
-import type { Props } from '@astrojs/starlight/props';
-import Default from '@astrojs/starlight/components/TableOfContents.astro';
+import Default from "@astrojs/starlight/components/TableOfContents.astro";
 
-const isBlogIndexPage = Astro.props.slug === 'blog';
-const isAnyTagPage = Astro.props.slug.includes('blog/tags');
+const { id } = Astro.locals.starlightRoute;
+const isBlogIndexPage = id === "blog";
+const isAnyTagPage = id.includes("blog/tags");
 ---
 
 {
-  isBlogIndexPage || isAnyTagPage ? (
-    <style>
-      .right-sidebar-container {
-        display: none;
-      }
-    </style>
-  ) : (
-    <Default {...Astro.props}>
-      <slot />
-    </Default>
-  )
+    isBlogIndexPage || isAnyTagPage ? (
+        <style>
+            .right-sidebar-container {
+                display: none;
+            }
+        </style>
+    ) : (
+        <Default>
+            <slot />
+        </Default>
+    )
 }
