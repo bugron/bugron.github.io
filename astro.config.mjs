@@ -12,6 +12,9 @@ import starlightLinksValidator from "starlight-links-validator";
 // https://astro.build/config
 export default defineConfig({
     site: import.meta.env.DEV ? "http://localhost:4321/" : BLOG_URL,
+    image: {
+        objectFit: "contain",
+    },
     vite: {
         plugins: [tailwindcss()],
     },
