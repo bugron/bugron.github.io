@@ -9,6 +9,21 @@ import tailwindcss from "@tailwindcss/vite";
 import starlightImageZoom from "starlight-image-zoom";
 import starlightLinksValidator from "starlight-links-validator";
 
+const starlightBlogImageZoom = {
+    name: "starlight-blog-image-zoom",
+    hooks: {
+        "config:setup"({ config, updateConfig }) {
+            updateConfig({
+                components: {
+                    ...config.components,
+                    MarkdownContent:
+                        "./src/components/overrides/MarkdownContent.astro",
+                },
+            });
+        },
+    },
+};
+
 // https://astro.build/config
 export default defineConfig({
     site: import.meta.env.DEV ? "http://localhost:4321/" : BLOG_URL,
@@ -25,6 +40,7 @@ export default defineConfig({
             favicon: "/favicon.ico",
             plugins: [
                 starlightBlog({
+                    navigation: "none",
                     authors: {
                         bugron: {
                             name: "Arsen Melikyan",
@@ -38,6 +54,7 @@ export default defineConfig({
                 starlightLinksValidator({
                     exclude: ["/blog/"],
                 }),
+                starlightBlogImageZoom,
             ],
             logo: {
                 dark: "/public/logo-dark.png",
@@ -51,9 +68,6 @@ export default defineConfig({
             },
             customCss: ["./src/styles/custom.css"],
             components: {
-                MarkdownContent:
-                    "./src/components/overrides/MarkdownContent.astro",
-                ThemeSelect: "starlight-blog/components/ThemeSelect.astro",
                 TableOfContents: "./src/components/TableOfContents.astro",
                 Header: "./src/components/Header.astro",
                 Head: "./src/components/Head.astro",
