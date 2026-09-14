@@ -1,54 +1,56 @@
-# Starlight Starter Kit: Basics
+# melikyan.dev
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+[![Deploy Astro blog to GitHub Pages](https://github.com/bugron/bugron.github.io/actions/workflows/deploy.yml/badge.svg?branch=astro)](https://github.com/bugron/bugron.github.io/actions/workflows/deploy.yml)
+[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build/)
 
+Source for [melikyan.dev](https://melikyan.dev/), Arsen Melikyan's personal blog about web development, debugging, cybersecurity, and software engineering.
+
+The site is built with [Astro](https://astro.build/), [Starlight](https://starlight.astro.build/), and [starlight-blog](https://github.com/HiDeoo/starlight-blog). It is generated as a static site and deployed to GitHub Pages.
+
+## Local development
+
+Node.js 22.12 or newer and npm are required.
+
+```bash
+npm ci
+npm run dev
 ```
-npm create astro@latest -- --template starlight
-```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/starlight/tree/main/examples/basics)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fwithastro%2Fstarlight%2Ftree%2Fmain%2Fexamples%2Fbasics&project-name=my-starlight-docs&repository-name=my-starlight-docs)
+The development server is available at [http://localhost:4321](http://localhost:4321).
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Commands
 
-## 🚀 Project Structure
+| Command                | Description                              |
+| ---------------------- | ---------------------------------------- |
+| `npm ci`               | Install the locked dependency versions   |
+| `npm run dev`          | Start the local development server       |
+| `npm run build`        | Type-check and build the production site |
+| `npm run preview`      | Preview the production build locally     |
+| `npm run format`       | Format the project with Prettier         |
+| `npm run format-check` | Check formatting without modifying files |
+| `npm run astro -- ...` | Run Astro CLI commands                   |
 
-Inside of your Astro + Starlight project, you'll see the following folders and files:
+## Project structure
 
-```
+```text
 .
-├── public/
+├── public/                  # Static assets copied as-is
 ├── src/
-│   ├── assets/
+│   ├── assets/              # Images processed by Astro
+│   ├── components/          # Site and Starlight component overrides
 │   ├── content/
-│   │   ├── docs/
-│   │   └── config.ts
-│   └── env.d.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
+│   │   ├── docs/            # Homepage and blog posts
+│   │   └── i18n/            # Starlight UI translations
+│   ├── pages/               # Standalone Astro pages
+│   └── styles/              # Global styles and Tailwind theme
+├── astro.config.mjs         # Astro, Starlight, and plugin configuration
+└── src/content.config.ts    # Content loaders and schemas
 ```
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+Blog posts live in `src/content/docs/blog/`. Assets specific to a post live in a matching `src/assets/<post-slug>/` directory.
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+## Deployment
 
-Static assets, like favicons, can be placed in the `public/` directory.
+The [`deploy.yml`](.github/workflows/deploy.yml) workflow builds and deploys the site to GitHub Pages whenever changes are pushed to the `astro` branch. The workflow can also be run manually from the Actions tab.
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+The repository's default pull request target is `master`; production deployment happens from `astro`.
